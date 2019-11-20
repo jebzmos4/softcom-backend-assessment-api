@@ -1,10 +1,10 @@
 module.exports = {
-  name: 'gokada-atm-microservice',
+  name: 'softcom-assessment-api',
   file: '../logs/',
   env: process.env.NODE_ENV || 'development',
   server: {
     port: process.env.PORT,
-    baseUrl: process.env.BASE_URL || 'http://localhost:4000'
+    baseUrl: process.env.BASE_URL
   },
   logging: {
     level: process.env.LOG_LEVEL || 'info',
@@ -21,9 +21,17 @@ module.exports = {
       dbProd: process.env.MONGODB_DATABASE_NAME
     },
     collections: {
-      atm: 'atm-transaction-details'
+      user: 'Users',
+      question: 'Questions'
     },
     queryLimit: process.env.MONGODB_QUERY_LIMIT,
     questionLimit: process.env.QUESTION_LIMIT
   },
+  jwt: {
+    expiresIn: process.env.JWTEXPIRESIN,
+    secret: process.env.JWTSECRET,
+  },
+  sendGrid: {
+    apikey: process.env.SENDGRID_API_KEY
+  }
 };

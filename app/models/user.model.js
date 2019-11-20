@@ -1,30 +1,49 @@
 /**
- * Created by Eshemogie Kassim(Jnr)
+ * Created by Morifeoluwa Jebutu
  */
 
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate');
 const config = require('../config/settings');
+const questionSchema = require('./question.model');
 
 const { Schema } = mongoose;
+
 const UserSchema = new Schema(
   {
-    name: {
-      type: String
-    },
-    cardDetails: {
+    firstname: {
       type: String,
-      required: true
+      required: true,
+      trim: true,
     },
-    pin: {
+    lastname: {
       type: String,
-      default: '0000',
-      required: true
+      required: true,
+      trim: true
     },
-    amount: {
-      type: Number,
-      required: true
-    }
+    email: {
+      type: String,
+      trim: true,
+      lowercase: true,
+      unique: true,
+      required: 'Email address is required',
+      match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
+    },
+    password: {
+      type: String,
+      required: true,
+      trim: true
+    },
+    loggedIn: {
+      type: Boolean,
+      default: false
+    },
+    questions: [{
+      id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Questions'
+      }
+    }]
   },
   {
     timestamps: true
@@ -33,5 +52,13 @@ const UserSchema = new Schema(
 
 UserSchema.plugin(mongoosePaginate);
 
-const userModel = mongoose.model(config.mongo.collections.atm, UserSchema);
+UserSchema.index({
+  firstname: 'text',
+  lastname: 'text',
+  email: 'text',
+  'questions.owner': 'text',
+  'questions.question': 'text',
+  'questions.answer': 'text'
+});
+const userModel = mongoose.model(config.mongo.collections.user, UserSchema);
 module.exports = userModel;

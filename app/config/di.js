@@ -1,5 +1,5 @@
 /**
- * Created by Morifeoluwa Jebutu on 30/05/2019.
+ * Created by Morifeoluwa Jebutu on 18/11/2019.
  * objective: building to scale
  */
 const morgan = require('morgan');
@@ -20,7 +20,7 @@ mongoose.Promise = bluebird;
  */
 serviceLocator.register('logger', () => {
   const fileTransport = new (winston.transports.DailyRotateFile)({
-    filename: `${config.file}terragon_em_app.log`,
+    filename: `${config.file}softcom_em_app.log`,
     datePattern: 'yyyy-MM-dd.',
     prepend: true,
     level: process.env.ENV === 'development' ? 'debug' : 'info',
@@ -52,18 +52,18 @@ serviceLocator.register('requestlogger', () => morgan('common'));
  * Returns a Mongo connection instance.
  */
 
-serviceLocator.register('mongo', () => {
+serviceLocator.register('mongo', (servicelocator) => {
+  const logger = servicelocator.get('logger');
   const connectionString =
     (!config.mongo.connection.username || !config.mongo.connection.password) ?
       `mongodb://${config.mongo.connection.host}:${config.mongo.connection.port}/${config.mongo.connection.dbProd}` :
       `mongodb://${config.mongo.connection.username}:${config.mongo.connection.password}` +
       `@${config.mongo.connection.host}:${config.mongo.connection.port}/${config.mongo.connection.dbProd}`;
-  mongoose.Promise = bluebird;
-  const mongo = mongoose.connect(connectionString, { useNewUrlParser: true });
+  const mongo = mongoose.connect(connectionString, { useNewUrlParser: true, useFindAndModify: false });
   mongo.then(() => {
-    console.log('Mongo Connection Established', connectionString);
+    logger.info('Mongo Connection Established', connectionString);
   }).catch(() => {
-    console.log('Mongo Connection disconnected');
+    logger.error('Mongo Connection disconnected');
     process.exit(1);
   });
 
