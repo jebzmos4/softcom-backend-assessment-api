@@ -1,1 +1,0 @@
-# softcom-backend-assessment-api
