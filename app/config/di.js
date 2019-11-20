@@ -19,13 +19,6 @@ mongoose.Promise = bluebird;
  * Returns an instance of logger for the App
  */
 serviceLocator.register('logger', () => {
-  const fileTransport = new (winston.transports.DailyRotateFile)({
-    filename: `${config.file}softcom_em_app.log`,
-    datePattern: 'yyyy-MM-dd.',
-    prepend: true,
-    level: process.env.ENV === 'development' ? 'debug' : 'info',
-  });
-
   const consoleTransport = new (winston.transports.Console)({
     datePattern: 'yyyy-MM-dd.',
     prepend: true,
@@ -35,7 +28,6 @@ serviceLocator.register('logger', () => {
   });
   return new (winston.Logger)({
     transports: [
-      fileTransport,
       consoleTransport,
     ],
   });
