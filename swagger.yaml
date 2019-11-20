@@ -1,143 +1,1121 @@
-openapi: 3.0.0
-servers:
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/JMorife/GlobalSMPPAPI/1.0.0
+swagger: '2.0'
 info:
-  description: This is an API for authenticating and thumbnail generator
-  version: "1.0.0"
-  title: HackerBay User Service
-  contact:
-    email: jebzmos4@gmail.com
-  license:
-    name: Apache 2.0
-    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
-
+  version: '1.0'
+  title: SOFTCOM-ASSESSMENT-API
+  description: 'TODO: Add Description'
+  contact: {}
+host: localhost:4444
+basePath: /
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
 paths:
-
-    /:
+  /:
     get:
-      summary: API default Endpoint
-      operationId: default endpoint
-      description: |
-        This gets the default welcome message
+      description: ''
+      summary: BASE
+      operationId: UnnammedEndpointGet
+      deprecated: false
+      produces:
+        - application/json
+      parameters: []
       responses:
-        '200':
-          description: Welcome to the Hackerbay API
-          content:
+        200:
+          description: ''
+          headers: {}
+  /signUp:
+    post:
+      description: ''
+      summary: SIGN UP
+      operationId: SignUpPost
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          description: ''
+          schema:
+            $ref: '#/definitions/SIGNUPREQUEST'
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: ''
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/SIGNUP'
+          examples:
             application/json:
-              schema:
-                $ref: '#/components/schemas/SendMessageResponse'
-        '404':
-          description: Not Found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-
+              error: false
+              code: 200
+              message: User Data successfully created in DB
+              response:
+                loggedIn: true
+                _id: 5dd27e7ae8d0917eed60ce0b
+                firstname: Morifeoluwa
+                lastname: Jebutu
+                email: jebzmos3@gmail.com
+                createdAt: 2019-11-18T11:20:26.813Z
+                updatedAt: 2019-11-18T11:20:26.813Z
+                __v: 0
+          headers:
+            Server:
+              type: string
+              default: softcom-assessment-api
+            Access-Control-Allow-Origin:
+              type: string
+              default: '*'
+            Access-Control-Allow-Credentials:
+              type: string
+              default: true
+            Access-Control-Allow-Method:
+              type: string
+              default: '*'
+            Connection:
+              type: string
+              default: Keep-Alive
+            Date:
+              type: string
+              default: Mon, 18 Nov 2019 11:20:26 GMT
+            Request-Id:
+              type: string
+              default: e826ece9-b898-4d15-a3e3-09557e707bfb
+            Response-Time:
+              type: string
+              default: 79
+            Transfer-Encoding:
+              type: string
+              default: chunked
   /login:
     post:
-      summary: authenticate a user
-      operationId: validate user credentials
-      description: |
-        By passing a username and password to send as a POST body, the API would send a message.
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Message'
-        description: Post Body
+      description: ''
+      summary: LOGIN
+      operationId: LoginPost
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          description: ''
+          schema:
+            $ref: '#/definitions/LOGINREQUEST'
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: ''
       responses:
-        '200':
-          description: User successfully authenticated
-          content:
+        202:
+          description: ''
+          schema:
+            $ref: '#/definitions/LOGIN'
+          examples:
             application/json:
-              schema:
-                $ref: '#/components/schemas/SendMessageResponse'
-        '401':
-          description: Missing argument or parameter
-          content:
+              error: false
+              code: 202
+              message: Login Successful
+              response:
+                token: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmtZWFJoSWpvaWFtVmllbTF2Y3pSQVoyMWhhV3d1WTI5dElpd2lhV0YwSWpveE5UYzBNRGMwTmpreExDSmxlSEFpT2pFMU56UXdOemd5T1RGOS5uVzlTODUtTVVEdW5ia2MwVzRCVlRyRlR1NWtvWmFBNzk0SlhNOXZqWnQ0
+                expiresIn: 1h
+          headers:
+            Server:
+              type: string
+              default: softcom-assessment-api
+            Access-Control-Allow-Origin:
+              type: string
+              default: '*'
+            Access-Control-Allow-Credentials:
+              type: string
+              default: true
+            Access-Control-Allow-Method:
+              type: string
+              default: '*'
+            Connection:
+              type: string
+              default: Keep-Alive
+            Date:
+              type: string
+              default: Mon, 18 Nov 2019 10:58:11 GMT
+            Request-Id:
+              type: string
+              default: bf2a3132-c91c-4c8e-8418-6659416197cc
+            Response-Time:
+              type: string
+              default: 44
+            Transfer-Encoding:
+              type: string
+              default: chunked
+  /logout:
+    patch:
+      description: ''
+      summary: LOGOUT
+      operationId: LogoutPatch
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          description: ''
+          schema:
+            $ref: '#/definitions/LOGOUTREQUEST'
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: ''
+        - name: token
+          in: header
+          required: true
+          type: string
+          description: ''
+      responses:
+        202:
+          description: ''
+          schema:
+            $ref: '#/definitions/LOGIN'
+          examples:
             application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          description: Internal server error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  /image:
+              error: false
+              code: 202
+              message: Login Successful
+              response:
+                token: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmtZWFJoSWpvaWFtVmllbTF2Y3pSQVoyMWhhV3d1WTI5dElpd2lhV0YwSWpveE5UYzBNRGMwTmpreExDSmxlSEFpT2pFMU56UXdOemd5T1RGOS5uVzlTODUtTVVEdW5ia2MwVzRCVlRyRlR1NWtvWmFBNzk0SlhNOXZqWnQ0
+                expiresIn: 1h
+          headers:
+            Server:
+              type: string
+              default: softcom-assessment-api
+            Access-Control-Allow-Origin:
+              type: string
+              default: '*'
+            Access-Control-Allow-Credentials:
+              type: string
+              default: true
+            Access-Control-Allow-Method:
+              type: string
+              default: '*'
+            Connection:
+              type: string
+              default: Keep-Alive
+            Date:
+              type: string
+              default: Mon, 18 Nov 2019 10:58:11 GMT
+            Request-Id:
+              type: string
+              default: bf2a3132-c91c-4c8e-8418-6659416197cc
+            Response-Time:
+              type: string
+              default: 44
+            Transfer-Encoding:
+              type: string
+              default: chunked
+  /question:
     post:
-      summary: generate a thumbnai;
-      operationId: validate token and compress image
-      description: |
-        By passing an image response user is validated and a thumbnail is genrated
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Message'
-        description: Post Body
+      description: ''
+      summary: ASK QUESTION
+      operationId: QuestionPost
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          description: ''
+          schema:
+            $ref: '#/definitions/ASKQUESTIONREQUEST'
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: ''
+        - name: token
+          in: header
+          required: true
+          type: string
+          description: ''
       responses:
-        '200':
-          description: Thumbnail generated
-          content:
+        202:
+          description: ''
+          schema:
+            $ref: '#/definitions/LOGIN'
+          examples:
             application/json:
-              schema:
-                $ref: '#/components/schemas/SendMessageResponse'
-        '401':
-          description: Missing argument or parameter
-          content:
+              error: false
+              code: 202
+              message: Login Successful
+              response:
+                token: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmtZWFJoSWpvaWFtVmllbTF2Y3pSQVoyMWhhV3d1WTI5dElpd2lhV0YwSWpveE5UYzBNRGMwTmpreExDSmxlSEFpT2pFMU56UXdOemd5T1RGOS5uVzlTODUtTVVEdW5ia2MwVzRCVlRyRlR1NWtvWmFBNzk0SlhNOXZqWnQ0
+                expiresIn: 1h
+          headers:
+            Server:
+              type: string
+              default: softcom-assessment-api
+            Access-Control-Allow-Origin:
+              type: string
+              default: '*'
+            Access-Control-Allow-Credentials:
+              type: string
+              default: true
+            Access-Control-Allow-Method:
+              type: string
+              default: '*'
+            Connection:
+              type: string
+              default: Keep-Alive
+            Date:
+              type: string
+              default: Mon, 18 Nov 2019 10:58:11 GMT
+            Request-Id:
+              type: string
+              default: bf2a3132-c91c-4c8e-8418-6659416197cc
+            Response-Time:
+              type: string
+              default: 44
+            Transfer-Encoding:
+              type: string
+              default: chunked
+    get:
+      description: ''
+      summary: GET QUESTION
+      operationId: QuestionGet
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: ''
+        - name: token
+          in: header
+          required: true
+          type: string
+          description: ''
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/GETQUESTION'
+          examples:
             application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        '500':
-          description: Internal server error
-          content:
+              error: false
+              code: 200
+              message: User Question(s) fetched
+              response:
+                - Subscribers: []
+                  _id: 5dd41ddf157d6c8290054ea6
+                  owner:
+                    _id: 5dd41d915225f8812b8ea626
+                    firstname: Morifeoluwa
+                    lastname: Jebutu
+                    email: morife@gokada.ng
+                  question: what is PHP?
+                  answers: []
+                  __v: 0
+                - Subscribers: []
+                  _id: 5dd41dec157d6c8290054ea8
+                  owner:
+                    _id: 5dd41d915225f8812b8ea626
+                    firstname: Morifeoluwa
+                    lastname: Jebutu
+                    email: morife@gokada.ng
+                  question: what is NodeJS?
+                  answers: []
+                  __v: 0
+                - Subscribers: []
+                  _id: 5dd41df5157d6c8290054eaa
+                  owner:
+                    _id: 5dd41d915225f8812b8ea626
+                    firstname: Morifeoluwa
+                    lastname: Jebutu
+                    email: morife@gokada.ng
+                  question: what is Java?
+                  answers: []
+                  __v: 0
+                - Subscribers: []
+                  _id: 5dd41e0f157d6c8290054ead
+                  owner:
+                    _id: 5dd41dfb157d6c8290054eac
+                    firstname: Morifeoluwa
+                    lastname: Jebutu
+                    email: edet@gokada.ng
+                  question: Tell me your name?
+                  answers: []
+                  __v: 0
+                - Subscribers: []
+                  _id: 5dd41e1d157d6c8290054eaf
+                  owner:
+                    _id: 5dd41dfb157d6c8290054eac
+                    firstname: Morifeoluwa
+                    lastname: Jebutu
+                    email: edet@gokada.ng
+                  question: Say Your age?
+                  answers: []
+                  __v: 0
+                - Subscribers: []
+                  _id: 5dd41e2d157d6c8290054eb1
+                  owner:
+                    _id: 5dd41dfb157d6c8290054eac
+                    firstname: Morifeoluwa
+                    lastname: Jebutu
+                    email: edet@gokada.ng
+                  question: ask me anything?
+                  answers: []
+                  __v: 0
+          headers:
+            Server:
+              type: string
+              default: softcom-assessment-api
+            Access-Control-Allow-Origin:
+              type: string
+              default: '*'
+            Access-Control-Allow-Credentials:
+              type: string
+              default: true
+            Access-Control-Allow-Method:
+              type: string
+              default: '*'
+            Connection:
+              type: string
+              default: Keep-Alive
+            Date:
+              type: string
+              default: Tue, 19 Nov 2019 17:05:55 GMT
+            Request-Id:
+              type: string
+              default: 891f390c-62c6-4ef9-8f2c-8f17f830e4bb
+            Response-Time:
+              type: string
+              default: 8
+            Transfer-Encoding:
+              type: string
+              default: chunked
+  /answer:
+    post:
+      description: ''
+      summary: ANSWER QUESTION
+      operationId: AnswerPost
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          description: ''
+          schema:
+            $ref: '#/definitions/ANSWERQUESTIONREQUEST'
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: ''
+        - name: token
+          in: header
+          required: true
+          type: string
+          description: ''
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/LOGOUT'
+          examples:
             application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  
-components:
-  schemas:
-    Message:
-      required:
-        - params
-      properties:
-        username:
+              error: false
+              code: 200
+              message: success
+              response: {}
+          headers:
+            Server:
+              type: string
+              default: softcom-assessment-api
+            Access-Control-Allow-Origin:
+              type: string
+              default: '*'
+            Access-Control-Allow-Credentials:
+              type: string
+              default: true
+            Access-Control-Allow-Method:
+              type: string
+              default: '*'
+            Connection:
+              type: string
+              default: Keep-Alive
+            Date:
+              type: string
+              default: Mon, 18 Nov 2019 11:25:24 GMT
+            Request-Id:
+              type: string
+              default: cba73738-c605-4730-bfcf-306959e13e82
+            Response-Time:
+              type: string
+              default: 42
+            Transfer-Encoding:
+              type: string
+              default: chunked
+  /search:
+    get:
+      description: ''
+      summary: SEARCH
+      operationId: SearchGet
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: text
+          in: query
+          required: true
           type: string
-          example: jebzmos4
-        password:
+          description: ''
+        - name: Content-Type
+          in: header
+          required: true
           type: string
-          example: morifeoluwa
-      type: object
-    GenericAPIResponse:
-      required:
-        - code
-        - message
-        - error
-      properties:
-        error:
-          type: boolean
-          default: false
-        code:
-          type: integer
-          format: int32
-        message:
+          description: ''
+        - name: token
+          in: header
+          required: true
           type: string
-    SendMessageResponse:
-      allOf:
-      - $ref: "#/components/schemas/GenericAPIResponse"
-    Error:
-      required:
-        - code
-        - message
-        - error
-      properties:
-        error:
-          type: boolean
-          default: true
-        code:
-          type: integer
-          format: int32
-        message:
+          description: ''
+      responses:
+        202:
+          description: ''
+          schema:
+            $ref: '#/definitions/LOGIN'
+          examples:
+            application/json:
+              error: false
+              code: 202
+              message: Login Successful
+              response:
+                token: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmtZWFJoSWpvaWFtVmllbTF2Y3pSQVoyMWhhV3d1WTI5dElpd2lhV0YwSWpveE5UYzBNRGMwTmpreExDSmxlSEFpT2pFMU56UXdOemd5T1RGOS5uVzlTODUtTVVEdW5ia2MwVzRCVlRyRlR1NWtvWmFBNzk0SlhNOXZqWnQ0
+                expiresIn: 1h
+          headers:
+            Server:
+              type: string
+              default: softcom-assessment-api
+            Access-Control-Allow-Origin:
+              type: string
+              default: '*'
+            Access-Control-Allow-Credentials:
+              type: string
+              default: true
+            Access-Control-Allow-Method:
+              type: string
+              default: '*'
+            Connection:
+              type: string
+              default: Keep-Alive
+            Date:
+              type: string
+              default: Mon, 18 Nov 2019 10:58:11 GMT
+            Request-Id:
+              type: string
+              default: bf2a3132-c91c-4c8e-8418-6659416197cc
+            Response-Time:
+              type: string
+              default: 44
+            Transfer-Encoding:
+              type: string
+              default: chunked
+  /voteQuestion:
+    post:
+      description: ''
+      summary: VOTE QUESTION
+      operationId: VoteQuestionPost
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          description: ''
+          schema:
+            $ref: '#/definitions/VOTEQUESTIONREQUEST'
+        - name: Content-Type
+          in: header
+          required: true
           type: string
+          description: ''
+        - name: token
+          in: header
+          required: true
+          type: string
+          description: ''
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/GETQUESTION3'
+          examples:
+            application/json:
+              error: false
+              code: 200
+              message: User Question(s) fetched
+              response:
+                - answer: []
+                  _id: 5dd28ff85396b9b86c1e6a13
+                  question: What is Node JS?
+                - answer: []
+                  _id: 5dd28fff5396b9b86c1e6a14
+                  question: What is Node JS?
+                - answer: []
+                  _id: 5dd290055396b9b86c1e6a15
+                  question: What is Node JS?
+                - answer: []
+                  _id: 5dd290708e9b2bb9ca37aea5
+                  question: What is MongoDB?
+          headers:
+            Server:
+              type: string
+              default: softcom-assessment-api
+            Access-Control-Allow-Origin:
+              type: string
+              default: '*'
+            Access-Control-Allow-Credentials:
+              type: string
+              default: true
+            Access-Control-Allow-Method:
+              type: string
+              default: '*'
+            Connection:
+              type: string
+              default: Keep-Alive
+            Date:
+              type: string
+              default: Mon, 18 Nov 2019 13:31:58 GMT
+            Request-Id:
+              type: string
+              default: aa3e4370-3d3b-4415-8627-94bee475d886
+            Response-Time:
+              type: string
+              default: 37
+            Transfer-Encoding:
+              type: string
+              default: chunked
+  /voteAnswer:
+    post:
+      description: ''
+      summary: VOTE ANSWER
+      operationId: VoteAnswerPost
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          description: ''
+          schema:
+            $ref: '#/definitions/VOTEANSWERREQUEST'
+        - name: Content-Type
+          in: header
+          required: true
+          type: string
+          description: ''
+        - name: token
+          in: header
+          required: true
+          type: string
+          description: ''
+      responses:
+        200:
+          description: ''
+          schema:
+            $ref: '#/definitions/LOGOUT'
+          examples:
+            application/json:
+              error: false
+              code: 200
+              message: success
+              response: {}
+          headers:
+            Server:
+              type: string
+              default: softcom-assessment-api
+            Access-Control-Allow-Origin:
+              type: string
+              default: '*'
+            Access-Control-Allow-Credentials:
+              type: string
+              default: true
+            Access-Control-Allow-Method:
+              type: string
+              default: '*'
+            Connection:
+              type: string
+              default: Keep-Alive
+            Date:
+              type: string
+              default: Mon, 18 Nov 2019 11:25:24 GMT
+            Request-Id:
+              type: string
+              default: cba73738-c605-4730-bfcf-306959e13e82
+            Response-Time:
+              type: string
+              default: 42
+            Transfer-Encoding:
+              type: string
+              default: chunked
+definitions:
+  SIGNUPREQUEST:
+    title: SIGNUPREQUEST
+    example:
+      firstname: Morifeoluwa
+      lastname: Jebutu
+      email: jebzmos3@gmail.com
+      password: jebzizi
+    type: object
+    properties:
+      firstname:
+        type: string
+      lastname:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+    required:
+      - firstname
+      - lastname
+      - email
+      - password
+  SIGNUP:
+    title: SIGNUP
+    example:
+      error: false
+      code: 200
+      message: User Data successfully created in DB
+      response:
+        loggedIn: true
+        _id: 5dd27e7ae8d0917eed60ce0b
+        firstname: Morifeoluwa
+        lastname: Jebutu
+        email: jebzmos3@gmail.com
+        createdAt: 2019-11-18T11:20:26.813Z
+        updatedAt: 2019-11-18T11:20:26.813Z
+        __v: 0
+    type: object
+    properties:
+      error:
+        type: boolean
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      response:
+        $ref: '#/definitions/Response'
+    required:
+      - error
+      - code
+      - message
+      - response
+  Response:
+    title: Response
+    example:
+      loggedIn: true
+      _id: 5dd27e7ae8d0917eed60ce0b
+      firstname: Morifeoluwa
+      lastname: Jebutu
+      email: jebzmos3@gmail.com
+      createdAt: 2019-11-18T11:20:26.813Z
+      updatedAt: 2019-11-18T11:20:26.813Z
+      __v: 0
+    type: object
+    properties:
+      loggedIn:
+        type: boolean
+      _id:
+        type: string
+      firstname:
+        type: string
+      lastname:
+        type: string
+      email:
+        type: string
+      createdAt:
+        type: string
+      updatedAt:
+        type: string
+      __v:
+        type: integer
+        format: int32
+    required:
+      - loggedIn
+      - _id
+      - firstname
+      - lastname
+      - email
+      - createdAt
+      - updatedAt
+      - __v
+  LOGINREQUEST:
+    title: LOGINREQUEST
+    example:
+      email: jebzmos4@gmail.com
+      password: jebzizi
+    type: object
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    required:
+      - email
+      - password
+  LOGIN:
+    title: LOGIN
+    example:
+      error: false
+      code: 202
+      message: Login Successful
+      response:
+        token: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmtZWFJoSWpvaWFtVmllbTF2Y3pSQVoyMWhhV3d1WTI5dElpd2lhV0YwSWpveE5UYzBNRGMwTmpreExDSmxlSEFpT2pFMU56UXdOemd5T1RGOS5uVzlTODUtTVVEdW5ia2MwVzRCVlRyRlR1NWtvWmFBNzk0SlhNOXZqWnQ0
+        expiresIn: 1h
+    type: object
+    properties:
+      error:
+        type: boolean
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      response:
+        $ref: '#/definitions/Response1'
+    required:
+      - error
+      - code
+      - message
+      - response
+  Response1:
+    title: Response1
+    example:
+      token: ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmtZWFJoSWpvaWFtVmllbTF2Y3pSQVoyMWhhV3d1WTI5dElpd2lhV0YwSWpveE5UYzBNRGMwTmpreExDSmxlSEFpT2pFMU56UXdOemd5T1RGOS5uVzlTODUtTVVEdW5ia2MwVzRCVlRyRlR1NWtvWmFBNzk0SlhNOXZqWnQ0
+      expiresIn: 1h
+    type: object
+    properties:
+      token:
+        type: string
+      expiresIn:
+        type: string
+    required:
+      - token
+      - expiresIn
+  LOGOUTREQUEST:
+    title: LOGOUTREQUEST
+    example:
+      email: jebzmos4@gmail.com
+      password: jebzizi
+    type: object
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    required:
+      - email
+      - password
+  ASKQUESTIONREQUEST:
+    title: ASKQUESTIONREQUEST
+    example:
+      email: edet@gokada.ng
+      question: ask me anything?
+    type: object
+    properties:
+      email:
+        type: string
+      question:
+        type: string
+    required:
+      - email
+      - question
+  GETQUESTION:
+    title: GETQUESTION
+    example:
+      error: false
+      code: 200
+      message: User Question(s) fetched
+      response:
+        - Subscribers: []
+          _id: 5dd41ddf157d6c8290054ea6
+          owner:
+            _id: 5dd41d915225f8812b8ea626
+            firstname: Morifeoluwa
+            lastname: Jebutu
+            email: morife@gokada.ng
+          question: what is PHP?
+          answers: []
+          __v: 0
+        - Subscribers: []
+          _id: 5dd41dec157d6c8290054ea8
+          owner:
+            _id: 5dd41d915225f8812b8ea626
+            firstname: Morifeoluwa
+            lastname: Jebutu
+            email: morife@gokada.ng
+          question: what is NodeJS?
+          answers: []
+          __v: 0
+        - Subscribers: []
+          _id: 5dd41df5157d6c8290054eaa
+          owner:
+            _id: 5dd41d915225f8812b8ea626
+            firstname: Morifeoluwa
+            lastname: Jebutu
+            email: morife@gokada.ng
+          question: what is Java?
+          answers: []
+          __v: 0
+        - Subscribers: []
+          _id: 5dd41e0f157d6c8290054ead
+          owner:
+            _id: 5dd41dfb157d6c8290054eac
+            firstname: Morifeoluwa
+            lastname: Jebutu
+            email: edet@gokada.ng
+          question: Tell me your name?
+          answers: []
+          __v: 0
+        - Subscribers: []
+          _id: 5dd41e1d157d6c8290054eaf
+          owner:
+            _id: 5dd41dfb157d6c8290054eac
+            firstname: Morifeoluwa
+            lastname: Jebutu
+            email: edet@gokada.ng
+          question: Say Your age?
+          answers: []
+          __v: 0
+        - Subscribers: []
+          _id: 5dd41e2d157d6c8290054eb1
+          owner:
+            _id: 5dd41dfb157d6c8290054eac
+            firstname: Morifeoluwa
+            lastname: Jebutu
+            email: edet@gokada.ng
+          question: ask me anything?
+          answers: []
+          __v: 0
+    type: object
+    properties:
+      error:
+        type: boolean
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      response:
+        type: array
+        items:
+          $ref: '#/definitions/Response4'
+    required:
+      - error
+      - code
+      - message
+      - response
+  Response4:
+    title: Response4
+    example:
+      Subscribers: []
+      _id: 5dd41ddf157d6c8290054ea6
+      owner:
+        _id: 5dd41d915225f8812b8ea626
+        firstname: Morifeoluwa
+        lastname: Jebutu
+        email: morife@gokada.ng
+      question: what is PHP?
+      answers: []
+      __v: 0
+    type: object
+    properties:
+      Subscribers:
+        type: array
+        items:
+          type: string
+      _id:
+        type: string
+      owner:
+        $ref: '#/definitions/Owner'
+      question:
+        type: string
+      answers:
+        type: array
+        items:
+          type: string
+      __v:
+        type: integer
+        format: int32
+    required:
+      - Subscribers
+      - _id
+      - owner
+      - question
+      - answers
+      - __v
+  Owner:
+    title: Owner
+    example:
+      _id: 5dd41d915225f8812b8ea626
+      firstname: Morifeoluwa
+      lastname: Jebutu
+      email: morife@gokada.ng
+    type: object
+    properties:
+      _id:
+        type: string
+      firstname:
+        type: string
+      lastname:
+        type: string
+      email:
+        type: string
+    required:
+      - _id
+      - firstname
+      - lastname
+      - email
+  ANSWERQUESTIONREQUEST:
+    title: ANSWERQUESTIONREQUEST
+    example:
+      questionId: 5dd41ddf157d6c8290054ea6
+      text: PHP is a the most used language in nigeria!
+      responder: Raphael
+    type: object
+    properties:
+      questionId:
+        type: string
+      text:
+        type: string
+      responder:
+        type: string
+    required:
+      - questionId
+      - text
+      - responder
+  LOGOUT:
+    title: LOGOUT
+    example:
+      error: false
+      code: 200
+      message: success
+      response: {}
+    type: object
+    properties:
+      error:
+        type: boolean
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      response:
+        type: object
+    required:
+      - error
+      - code
+      - message
+      - response
+  VOTEQUESTIONREQUEST:
+    title: VOTEQUESTIONREQUEST
+    example:
+      questionId: 5dd51bb4a716f56b6ce6cbbf
+      vote: false
+    type: object
+    properties:
+      questionId:
+        type: string
+      vote:
+        type: boolean
+    required:
+      - questionId
+      - vote
+  GETQUESTION3:
+    title: GETQUESTION3
+    example:
+      error: false
+      code: 200
+      message: User Question(s) fetched
+      response:
+        - answer: []
+          _id: 5dd28ff85396b9b86c1e6a13
+          question: What is Node JS?
+        - answer: []
+          _id: 5dd28fff5396b9b86c1e6a14
+          question: What is Node JS?
+        - answer: []
+          _id: 5dd290055396b9b86c1e6a15
+          question: What is Node JS?
+        - answer: []
+          _id: 5dd290708e9b2bb9ca37aea5
+          question: What is MongoDB?
+    type: object
+    properties:
+      error:
+        type: boolean
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      response:
+        type: array
+        items:
+          $ref: '#/definitions/Response8'
+    required:
+      - error
+      - code
+      - message
+      - response
+  Response8:
+    title: Response8
+    example:
+      answer: []
+      _id: 5dd28ff85396b9b86c1e6a13
+      question: What is Node JS?
+    type: object
+    properties:
+      answer:
+        type: array
+        items:
+          type: string
+      _id:
+        type: string
+      question:
+        type: string
+    required:
+      - answer
+      - _id
+      - question
+  VOTEANSWERREQUEST:
+    title: VOTEANSWERREQUEST
+    example:
+      answerId: 5dd53eb269af3e4d8a38ac2e
+      vote: false
+    type: object
+    properties:
+      answerId:
+        type: string
+      vote:
+        type: boolean
+    required:
+      - answerId
+      - vote
+tags: []

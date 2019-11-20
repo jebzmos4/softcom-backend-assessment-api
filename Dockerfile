@@ -14,7 +14,7 @@ WORKDIR /app
 RUN npm install
 
 # Expose API port to the outside
-EXPOSE 4000
+EXPOSE 4444
 
 # Launch application
 CMD ["npm","run", "start"]
