@@ -58,7 +58,8 @@ UserSchema.index({
   email: 'text',
   'questions.owner': 'text',
   'questions.question': 'text',
-  'questions.answer': 'text'
+  'questions.answer': 'text',
+  'questions.answer.text': 'text'
 });
 const userModel = mongoose.model(config.mongo.collections.user, UserSchema);
 module.exports = userModel;

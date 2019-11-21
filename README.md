@@ -7,7 +7,7 @@ Docker Image Link
 ----------
 `https://hub.docker.com/r/moriagape/softcom-backend-assessment`
 
-#You can pull with
+You can pull with
 `docker pull moriagape/softcom-backend-assessment`
 
 Clone repository and run npm install to setup dependencies
@@ -46,6 +46,6 @@ Run Test
 npm run test
 ```
 
-## Documenation
+## Documentation
 Link to hosted swagger doc: https://softcom-backend-assessment.herokuapp.com/api-docs
 
