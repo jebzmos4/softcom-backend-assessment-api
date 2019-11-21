@@ -35,9 +35,10 @@ class User {
   }
 
   answerQuestion(data) {
-    data.upVotes = 0;
-    data.downVotes = 0;
-    return this.mongo.answerQuestion(data);
+    const param = data;
+    param.upVotes = 0;
+    param.downVotes = 0;
+    return this.mongo.answerQuestion(param);
   }
 
   voteAnswer(data) {

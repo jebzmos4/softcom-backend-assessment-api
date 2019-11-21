@@ -30,6 +30,7 @@ function verifyToken(req, res, next) {
       }, httpStatus.FORBIDDEN);
     }
 
+    // eslint-disable-next-line no-inner-declarations
     function verifyCallBack(error, decoded) {
       if (error) {
         return Response.failure(res, {
@@ -37,6 +38,7 @@ function verifyToken(req, res, next) {
           response: {},
         }, httpStatus.UNAUTHORIZED);
       }
+      // eslint-disable-next-line no-sequences
       if (req.method === 'PUT' || req.method === 'DELETE', req.method === 'PATCH' || req.method === 'GET') {
         req.updateBy = decoded.data;
       } else if (req.method === 'POST') {
@@ -50,7 +52,7 @@ function verifyToken(req, res, next) {
 
     return jwt.verify(Token, secret, verifyCallBack);
   } catch (error) {
-    next(error);
+    return next(error);
   }
 }
 

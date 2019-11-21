@@ -1,4 +1,6 @@
 // During the test the env variable is set to test
+/* global describe, it */
+/* eslint no-undef: "error" */
 process.env.NODE_ENV = 'development';
 
 // Require the dev-dependencies

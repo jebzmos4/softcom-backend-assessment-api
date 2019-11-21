@@ -1,12 +1,12 @@
 /* eslint-disable radix */
 /* eslint-disable no-shadow */
+/* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
 /**
  * Created by Morifeoluwa Jebutu
  * objective: building to scale
  */
 
 const config = require('../config/settings');
-const _ = require('lodash');
 
 class MongoDBHelper {
   /**
@@ -33,7 +33,7 @@ class MongoDBHelper {
       const mongodbSaveSchema = this.MongoDBModel(data);
       return mongodbSaveSchema.save((error, result) => {
         if (error != null) {
-          return reject(this.handleError(error));
+          return reject(MongoDBHelper.handleError(error));
         }
         return resolve(result);
       });
@@ -57,7 +57,7 @@ class MongoDBHelper {
           if (config.logging.console) {
             return new Error(`Update Error: ${JSON.stringify(error)}`);
           }
-          return reject(this.handleError(error));
+          return reject(MongoDBHelper.handleError(error));
         }
         if (error == null && response == null) {
           return reject(new Error("Record Not Found In DB'"));
@@ -76,7 +76,7 @@ class MongoDBHelper {
 
       return query.exec((err, modelData) => {
         if (err) {
-          return reject(this.handleError(err));
+          return reject(MongoDBHelper.handleError(err));
         }
         return resolve(modelData);
       });
@@ -172,7 +172,7 @@ class MongoDBHelper {
    * @param report
    * @returns {{error: boolean, message: *}}
    */
-  handleError(report) {
+  static handleError(report) {
     return { error: true, msg: report };
   }
 }

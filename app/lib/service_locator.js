@@ -21,7 +21,8 @@ function ServiceLocator() {
      *
      * @method register
      * @param  {String}   dependencyName The dependency name
-     * @param  {Function} constructor    The function used for initially instantiating the dependency.
+     * @param  {Function} constructor
+     * The function used for initially instantiating the dependency.
      * @return {void}
      */
 ServiceLocator.prototype.register = function register(dependencyName, constructor) {
@@ -68,7 +69,8 @@ ServiceLocator.prototype.get = function get(dependencyName) {
      * as the object. This object contains all dependencies registered in this container.
      *
      * @method getAll
-     * @return {Array} Contain all the dependencies registered in this container after being resolved.
+     * @return {Array}
+     * Contain all the dependencies registered in this container after being resolved.
      */
 ServiceLocator.prototype.getAll = function getAll() {
   const dependencies = Object.keys(this.dependencyMap);

@@ -5,7 +5,6 @@
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate');
 const config = require('../config/settings');
-const questionSchema = require('./question.model');
 
 const { Schema } = mongoose;
 

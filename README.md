@@ -33,7 +33,7 @@ SENDGRID_API_KEY='Sample API key in sample.env file'
 Get API running
 ----------------------------
 ```
-npm run start
+npm start
 ```
 Check For Linting
 -------------
@@ -43,7 +43,7 @@ npm run lint
 Run Test
 -------------
 ```
-npm run test
+npm test
 ```
 
 ## Documentation

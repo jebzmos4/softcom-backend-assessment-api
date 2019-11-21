@@ -1,4 +1,6 @@
 // During the test the env variable is set to test
+/* global describe, it */
+/* eslint no-undef: "error" */
 process.env.NODE_ENV = 'development';
 
 // Require the dev-dependencies
@@ -61,7 +63,7 @@ describe('User SignUp Tests', () => {
       const credentials = {
         lastname: 'jebzmos4',
         firstname: '123456',
-        email: 'mori@gmail.com',
+        email: 'morifeoluwa@gmail.com',
         password: 123456
       };
       chai.request(server)
