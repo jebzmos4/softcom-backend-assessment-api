@@ -4,7 +4,7 @@ info:
   title: SOFTCOM-ASSESSMENT-API
   description: 'TODO: Add Description'
   contact: {}
-host: localhost:4444
+host: https://softcom-backend-assessment.herokuapp.com
 basePath: /
 schemes:
   - https
