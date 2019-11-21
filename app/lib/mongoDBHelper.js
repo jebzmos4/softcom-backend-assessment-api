@@ -141,7 +141,6 @@ class MongoDBHelper {
   }
 
   voteAnswer(data) {
-    console.log(data);
     return new Promise((resolve, reject) => {
       this.QuestionModel.updateOne({ 'answers._id': data.answerId }, { $inc: data.vote }, (err, data) => {
         if (err) return reject(err);

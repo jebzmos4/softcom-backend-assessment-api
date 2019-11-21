@@ -32,9 +32,7 @@ const questionSchema = new Schema({
 });
 
 questionSchema.plugin(mongoosePaginate);
-questionSchema.index({
-  owner: 'text', answers: 'text', question: 'text', 'answers.text': 'text', 'answers.responder': 'text'
-});
+questionSchema.index({ '$**': 'text' });
 
 const questionModel = mongoose.model(config.mongo.collections.question, questionSchema);
 module.exports = questionModel;

@@ -217,7 +217,13 @@ class User {
         }, httpStatus.BAD_REQUEST);
       }
       return this.service.answerQuestion(req.body)
-        .then(() => {
+        .then((response) => {
+          if (response.nModified === 0) {
+            return Response.failure(res, {
+              message: 'Question does not exist',
+              response: false
+            }, httpStatus.NOT_IMPLEMENTED);
+          }
           this.service.getQuestions({ _id: req.body.questionId })
             .then((fetchResponse) => {
               this.service.sendNotification(fetchResponse[0].owner.email, req.body.text);
@@ -225,7 +231,7 @@ class User {
               message: 'Unable to send notification to user',
               response: fetchError
             }));
-          Response.success(res, {
+          return Response.success(res, {
             message: 'Question Answered',
             response: req.body.text
           }, httpStatus.OK);

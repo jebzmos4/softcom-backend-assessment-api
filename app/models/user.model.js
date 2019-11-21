@@ -52,14 +52,6 @@ const UserSchema = new Schema(
 
 UserSchema.plugin(mongoosePaginate);
 
-UserSchema.index({
-  firstname: 'text',
-  lastname: 'text',
-  email: 'text',
-  'questions.owner': 'text',
-  'questions.question': 'text',
-  'questions.answer': 'text',
-  'questions.answer.text': 'text'
-});
+UserSchema.index({ '$**': 'text' });
 const userModel = mongoose.model(config.mongo.collections.user, UserSchema);
 module.exports = userModel;
