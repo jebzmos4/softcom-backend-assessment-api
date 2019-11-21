@@ -51,7 +51,7 @@ serviceLocator.register('mongo', (servicelocator) => {
       `mongodb://${config.mongo.connection.host}:${config.mongo.connection.port}/${config.mongo.connection.dbProd}` :
       `mongodb://${config.mongo.connection.username}:${config.mongo.connection.password}` +
       `@${config.mongo.connection.host}:${config.mongo.connection.port}/${config.mongo.connection.dbProd}`;
-  const mongo = mongoose.connect(connectionString, { useNewUrlParser: true, useFindAndModify: false });
+  const mongo = mongoose.connect(connectionString, { useNewUrlParser: true, useFindAndModify: false, useCreateIndex: true });
   mongo.then(() => {
     logger.info('Mongo Connection Established', connectionString);
   }).catch(() => {

@@ -72,7 +72,7 @@ class User {
         message: 'This endpoint requires a JSON body parameter'
       }, httpStatus.BAD_REQUEST);
     }
-    const errors = utils.checkRequestBody(req.body, ['firstname', 'lastname', 'email']);
+    const errors = utils.checkRequestBody(req.body, ['firstname', 'lastname', 'email', 'password']);
     if (errors) {
       this.logger.error('required body parameter not passed');
       return Response.failure(res, {
